@@ -23,8 +23,10 @@ server.register([Vision, Inert, CookieAuth], (err) => {
   });
 
   server.views({
-    engines: { hbs: Handlebars },
-    path: './views'
+    engines: { html: Handlebars },
+    path: './src/views',
+    layoutPath: './src/views/layout',
+    layout: 'index'
   });
 
   server.route(routes);
