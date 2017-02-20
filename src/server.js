@@ -4,6 +4,7 @@ const Inert = require('inert');
 const Handlebars = require('handlebars');
 const CookieAuth = require('hapi-auth-cookie'); //rm
 
+
 const routes = require('./routes.js');
 
 const server = new Hapi.Server();
@@ -15,9 +16,9 @@ server.connection({
 server.register([Vision, Inert, CookieAuth], (err) => {
   if (err) throw err;
 
-  server.auth.strategy('session', 'cookie', 'optional', {   //rm
+  server.auth.strategy('base', 'cookie', 'optional', {   //rm
     password: 'datagangrulesokdatagangrulesokdatagangrulesok',
-    cookie: 'datagang-cookie',
+    cookie: 'cookie-name',
     isSecure: false,
     ttl: 24 * 60 * 60 * 1000
   });
