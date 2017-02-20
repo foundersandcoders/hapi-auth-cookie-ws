@@ -26,7 +26,7 @@ const authRoute = {
   config: {
     auth: {
       mode: 'try',
-      strategy: 'session'
+      strategy: 'base'
     },
     handler (request, reply) {
       reply(request.auth.isAuthenticated
