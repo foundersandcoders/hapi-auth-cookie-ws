@@ -1,13 +1,29 @@
 .login-form {
   margin: 2rem auto;
   display: block;
-  width: 40%;
+  width: 30%;
+  background-color: #fff;
   border: 1px solid #000;
-  border-radius: 0.2rem;
-  height: 6rem;
-  padding-top: 0.5rem;
+  padding: 1rem;
+  text-align: center;
 }
 
 body {
   background-color: #333;
+}
+
+h1, h2, a, ol {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+a, ol {
+  display: block;
+  margin-top: 5rem;
+}
+
+ol {
+  width: 30%;
+  margin: 0 auto;
 }
