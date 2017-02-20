@@ -119,17 +119,20 @@ server.route({
 
 The plugin will check if a cookie has been set and if not, block access, intercepting before the handler is called.
 
+## Stretch Goals: If you have time
 
-## Access details of the logged in user
+#### Access details of the logged in user
 
-Easy: `request.auth.credentials`. We get back whatever we passed to `set`.
+Easy: `request.auth.credentials`. We get back whatever we passed to `set`. How could you use this with handlebars to selectively render logged in user information?
 
-## Logout (end session)
+#### Logout (end session)
 
-Also easy: `request.cookieAuth.clear()`. No more cookie!
+Also easy: `request.cookieAuth.clear()`. No more cookie! Create a logout button which clears the cookie.
 
 
-## Set defaults
+## Further information
+
+#### Mode
 
 You have the option of passing a `mode` argument to `strategy` in this position:
 
@@ -139,6 +142,6 @@ server.auth.strategy(name, scheme, [mode], [options])
 
 If you pass `true` or `'required'`, all routes will automatically be protected by the strategy. If you pass `'try'`, all routes will be protected, but with their `config.auth.mode` property set to try (see *Add auth to your routes* above).
 
-## Gotcha!
+#### Gotcha!
 
 Unlike the plugins you have used so far, hapi-cookie-auth loads asynchronously. That means anything you do to the server (`server.start`, `server.routes`) must be done in the `register` callback. This should make testing fun.
