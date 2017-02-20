@@ -1,21 +1,7 @@
-const CookieAuth = require('hapi-auth-cookie');
-
-const home = {
-  method: 'GET',
-  path: '/',
-  handler (req, reply) {
-    reply.view('index');
-  }
-}
-
 const login = {
   method: 'POST',
   path: '/login',
   handler (req, reply) {
-    var username = req.payload.username;
-    var password = req.payload.password;
-    // Database check
-    req.cookieAuth.set({ username: username });
     reply.view('user-page');
   }
 }
@@ -23,16 +9,16 @@ const login = {
 const authRoute = {
   method: 'GET',
   path: '/auth-only',
-  config: {
-    auth: {
-      mode: 'try',
-      strategy: 'base'
-    },
-    handler (request, reply) {
-      reply(request.auth.isAuthenticated
-      ? 'You\'re authenticated :)'
-      : 'You\'re not authenticated :(');
-    }
+  handler (request, reply) {
+    reply('You\'re not authenticated :(');
+  }
+}
+
+const home = {
+  method: 'GET',
+  path: '/',
+  handler (req, reply) {
+    reply.view('index');
   }
 }
 
