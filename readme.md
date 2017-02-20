@@ -9,9 +9,9 @@ First clone the repo and run `npm install`.
 
 ## Step 1: Register hapi-auth-cookie
 
-- First install the dependency using `npm install -S hapi-auth-cookie`.
+- First install the module using `npm install -S hapi-auth-cookie`.
 
-- Then you'll need to require in this module in server.js:
+- Then you'll need to require CookieAuth in server.js:
 
 ```javascript
 var CookieAuth = require('hapi-auth-cookie');
@@ -27,7 +27,7 @@ server.register([Vision, Inert, CookieAuth], (err) => {
 
 });
 ```
-## Step 2: Configure the Strategy
+## Step 2: Configure the authentication strategy
 
 ```javascript
 server.auth.strategy(name, scheme, [mode], [options]);
@@ -48,11 +48,11 @@ The strategy must be configured within the register callback.
 server.register(CookieAuth, function (err) {
 
   var options = {
-      password: 'm!*"2/),p4:xDs%KEgVr7;e#85Ah^WYC',
-      cookie: 'cookie-name',
-      isSecure: false,
-      ttl: 24 * 60 * 60 * 1000
-    })
+    password: 'm!*"2/),p4:xDs%KEgVr7;e#85Ah^WYC',
+    cookie: 'cookie-name',
+    isSecure: false,
+    ttl: 24 * 60 * 60 * 1000
+  };
 
   server.auth.strategy('base', 'cookie', options)
 
@@ -62,18 +62,19 @@ server.register(CookieAuth, function (err) {
 ###### Options
 We could use any name for our strategy, but we will need to use the name we choose to refer to it later.
 
- - Password should be at least 32 chars. The plugin will encrypt and decrypt your cookie using it. In real life this should not be written into your code.
+ - Password should be at least 32 chars. The plugin will encrypt and decrypt your cookie using it.
 
  - Cookie name can be anything.
 
- - isSecure, if `true`, will prevent the cookie being sent on insecure connections. Hapi seems to consider localhost as insecure, so set it to `false` for development and `true` for production (assuming you are hosting on https).
+ - isSecure, if `true`, will prevent the cookie being sent on insecure connections. Hapi considers localhost as insecure, so set it to `false` for development.
 
  - ttl sets when the session will automatically expire in milliseconds after creation.
 
-There are lots more options you can set. If you want to define more than one strategy, you will need to make use of the `requestDecoratorName` option, for example. Check the docs for the plugin.
-
+There are lots more options you can set. Check out the [doc](https://github.com/hapijs/hapi-auth-cookie)
 
 ## Step 3: Login a user
+
+Edit the '/login' such that it creates a session using the data from the form.
 
 Logging someone in is called creating a session. We will create a session by creating a cookie using the `set` method of the `cookieAuth` object which (by default) the plugin adds to the request object.
 
@@ -98,6 +99,8 @@ const login = {
 
 ## Step 4: Add auth to your routes
 
+Add authentication to your /auth-only route.
+
 Now we can check whether a cookie has been set by configuring the `auth` object of a route. We can allow access to the route and handle the session checking in the handler:
 
 
@@ -119,12 +122,32 @@ server.route({
 })
 ```
 
-
 ## Stretch Goals: If you have time
 
 #### Access details of the logged in user
 
-Easy: `request.auth.credentials`. We get back whatever we passed to `set`. How could you use this with handlebars to selectively render logged in user information?
+Easy: `request.auth.credentials`. We get back whatever we passed to `set`. Use this with handlebars to selectively render authenticated user information.
+
+Adding to the routes...
+
+```javascript
+handler: function (request, reply) {
+    ...
+    reply.view('index', {
+        credentials: request.auth.credentials
+    });
+}
+```
+Adding to the views...
+```javascript
+{{#if credentials.firstName}}
+    <h1>Welcome back {{credentials.firstName}}!</h1>
+{{else}}
+    <h1>Welcome guest!</h1>
+{{/if}}
+```
+
+Alternatively... check out [hapi-context-credentials](https://github.com/mtharrison/hapi-context-credentials) for a neater way of doing this. 
 
 #### Logout (end session)
 
