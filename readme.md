@@ -98,26 +98,27 @@ const login = {
 
 ## Step 4: Add auth to your routes
 
-Now we can check whether a cookie has been set by configuring the `auth` object of a route. We can simply block a route for users without a set cookie:
+Now we can check whether a cookie has been set by configuring the `auth` object of a route. We can allow access to the route and handle the session checking in the handler:
 
-The hyperlink makes a request for the /secret end point. Add authentication to this route.
 
 ```javascript
 server.route({  
   method: 'GET',
-  path: '/some-route',
+  path: '/auth-only',
   config: {
     auth: {
+      mode: 'try',
       strategy: 'base'
     },
     handler (request, reply) {
-      reply('you’re authenticated :)')
+      reply(request.auth.isAuthenticated
+      ? 'You\'re authenticated :)'
+      : 'You\'re not authenticated :(');
     }
   }
 })
 ```
 
-The plugin will check if a cookie has been set and if not, block access, intercepting before the handler is called.
 
 ## Stretch Goals: If you have time
 

@@ -22,13 +22,16 @@ const login = {
 
 const authRoute = {
   method: 'GET',
-  path: '/secret',
+  path: '/auth-only',
   config: {
     auth: {
-      strategy: 'base'
-      },
+      mode: 'try',
+      strategy: 'session'
+    },
     handler (request, reply) {
-      reply('you’re authenticated :)')
+      reply(request.auth.isAuthenticated
+      ? 'You\'re authenticated :)'
+      : 'You\'re not authenticated :(');
     }
   }
 }
