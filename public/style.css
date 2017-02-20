@@ -1,0 +1,13 @@
+.login-form {
+  margin: 2rem auto;
+  display: block;
+  width: 40%;
+  border: 1px solid #000;
+  border-radius: 0.2rem;
+  height: 6rem;
+  padding-top: 0.5rem;
+}
+
+body {
+  background-color: #333;
+}
