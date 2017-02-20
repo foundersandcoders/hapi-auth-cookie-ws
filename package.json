@@ -4,7 +4,6 @@
   "description": "1 hour workshop to add hapi-auth-cookie to an existing hapi server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "devStart": "nodemon index.js"
   },
   "keywords": [
@@ -18,7 +17,9 @@
     "env2": "^2.1.1",
     "handlebars": "^4.0.6",
     "hapi": "^16.1.0",
+    "hapi-auth-cookie": "^6.1.1",
     "inert": "^4.1.0",
+    "materialize-css": "^0.98.0",
     "vision": "^4.1.1"
   },
   "devDependencies": {
