@@ -20,10 +20,10 @@ h1, h2, a, ol {
 
 a, ol {
   display: block;
-  margin-top: 5rem;
+  width: 60%;
+  margin: 5rem auto;
 }
 
-ol {
-  width: 30%;
-  margin: 0 auto;
+li {
+  margin-bottom: 1rem;
 }
