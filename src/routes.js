@@ -1,19 +1,3 @@
-const login = {
-  method: 'POST',
-  path: '/login',
-  handler (req, reply) {
-    reply.view('user-page');
-  }
-}
-
-const authRoute = {
-  method: 'GET',
-  path: '/auth-only',
-  handler (request, reply) {
-    reply('You\'re not authenticated :(');
-  }
-}
-
 const home = {
   method: 'GET',
   path: '/',
@@ -29,6 +13,22 @@ const fileServer = {
     directory: {
       path: './public'
     }
+  }
+}
+
+const login = {
+  method: 'POST',
+  path: '/login',
+  handler (req, reply) {
+    reply.view('user-page');
+  }
+}
+
+const authRoute = {
+  method: 'GET',
+  path: '/auth-only',
+  handler (request, reply) {
+    reply('You\'re not authenticated :(');
   }
 }
 
