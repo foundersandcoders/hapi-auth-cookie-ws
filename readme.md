@@ -6,6 +6,8 @@ You'll see a Hapi.js server in the src directory with handlebars templating engi
 
 First clone the repo and run `npm install`.
 
+
+
 ## Step 1: Register hapi-auth-cookie
 
 - First install the module with your command line:
@@ -15,18 +17,18 @@ npm install -S hapi-auth-cookie
 
 - Require CookieAuth in server.js:
 
-```javascript
-var CookieAuth = require('hapi-auth-cookie');
-```
+  ```javascript
+  var CookieAuth = require('hapi-auth-cookie');
+  ```
 
 - Now register the module with your server alongside the other plugins:
 
-```javascript
-server.register([Vision, Inert, CookieAuth], (err) => {
-  if (err) throw err;
-...
-});
-```
+  ```javascript
+  server.register([Vision, Inert, CookieAuth], (err) => {
+    if (err) throw err;
+  ...
+  });
+  ```
 
 ## Step 2: Configure the authentication strategy
 
@@ -40,7 +42,7 @@ A strategy is a configured instance of a *scheme*.
 
 It's the type, i.e. the *manner*, of authentication. Hapi-auth-cookie creates a scheme called 'cookie', which we reference when creating our strategy (the second argument of `strategy`).
 
-> We might want to use more than one strategy of the same scheme. For example, if we have two different classes of users (ordinary users and administrators) defining two strategies will allow us to set different permissions on routes more easily. In this case we will create one strategy called 'base' - we do not need any more.
+We might want to use more than one strategy of the same scheme. For example, if we have two different classes of users (ordinary users and administrators) defining two strategies will allow us to set different permissions on routes more easily. In this case we will create one strategy called 'base' - we do not need any more.
 
 
 The strategy must be configured within the register callback.
