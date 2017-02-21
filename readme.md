@@ -15,18 +15,18 @@ npm install -S hapi-auth-cookie
 
 - Require CookieAuth in server.js:
 
-  ```javascript
-  var CookieAuth = require('hapi-auth-cookie');
-  ```
+```javascript
+var CookieAuth = require('hapi-auth-cookie');
+```
 
 - Now register the module with your server alongside the other plugins:
 
-  ```javascript
-  server.register([Vision, Inert, CookieAuth], (err) => {
-    if (err) throw err;
-  ...
-  });
-  ```
+```javascript
+server.register([Vision, Inert, CookieAuth], (err) => {
+  if (err) throw err;
+...
+});
+```
 
 ## Step 2: Configure the authentication strategy
 
