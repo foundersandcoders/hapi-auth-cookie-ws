@@ -6,7 +6,7 @@ You'll see a Hapi.js server in the src directory with handlebars templating engi
 
 First clone the repo and run `npm install`.
 
-
+> Note: This workshop is designed to be a straight forward walk through. You may be tempted to simply copy and paste this code. Don't, you'll gain more by writing your code from scratch!
 
 ## Step 1: Register hapi-auth-cookie
 
