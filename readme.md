@@ -1,34 +1,35 @@
 # Hapi-auth-cookie workshop
 
-In this workshop you'll be adding session management (cookies) and authentication using hapi-auth-cookie to the existing simple hapi server.
+In this workshop you'll be adding session management (cookies) and authentication to the existing simple hapi server using [hapi-auth-cookie](https://github.com/hapijs/hapi-auth-cookie).
 
-You'll see a Hapi.js server in the src directory with handlebars templating engine already configured.
+You'll see a Hapi.js server in the src directory with a handlebars templating engine already configured.
 
 First clone the repo and run `npm install`.
 
-
+> Note: This workshop is designed to be a straight forward walk through. You may be tempted to simply copy and paste this code. Don't, you'll gain more by writing your code from scratch!
 
 ## Step 1: Register hapi-auth-cookie
 
 - First install the module with your command line:
+
 ```
 npm install -S hapi-auth-cookie
 ```
 
 - Require CookieAuth in server.js:
 
-  ```javascript
-  var CookieAuth = require('hapi-auth-cookie');
-  ```
+```javascript
+var CookieAuth = require('hapi-auth-cookie');
+```
 
 - Now register the module with your server alongside the other plugins:
 
-  ```javascript
-  server.register([Vision, Inert, CookieAuth], (err) => {
-    if (err) throw err;
-  ...
-  });
-  ```
+```javascript
+server.register([Vision, Inert, CookieAuth], (err) => {
+  if (err) throw err;
+...
+});
+```
 
 ## Step 2: Configure the authentication strategy
 
@@ -38,16 +39,11 @@ server.auth.strategy(name, scheme, [mode], [options]);
 
 A strategy is a configured instance of a *scheme*.
 
-###### What's a scheme?
+#### What's a scheme?
 
 It's the type, i.e. the *manner*, of authentication. Hapi-auth-cookie creates a scheme called 'cookie', which we reference when creating our strategy (the second argument of `strategy`).
 
-We might want to use more than one strategy of the same scheme. For example, if we have two different classes of users (ordinary users and administrators) defining two strategies will allow us to set different permissions on routes more easily. In this case we will create one strategy called 'base' - we do not need any more.
-
-
-The strategy must be configured within the register callback.
-
-We could use any name for our strategy, but we will need to use the name we choose to refer to it later.
+The strategy must be configured within the register callback. We could use any name for our strategy, but we will need to use the name we choose to refer to it later. In this case we will create one strategy called 'base'.
 
 ```javascript
 server.register([Vision, Inert, CookieAuth],
@@ -62,7 +58,7 @@ server.register([Vision, Inert, CookieAuth],
   ...
 })
 ```
-###### Options
+#### Options
 
  - Password should be at least 32 chars. The plugin will encrypt and decrypt your cookie using it.
 
@@ -76,7 +72,7 @@ There are lots more options you can set. Check out the [docs](https://github.com
 
 ## Step 3: Login a user
 
-Logging someone in is called creating a session. Edit the `/login` route to do create a session.
+Logging someone in is called creating a session. Edit the `/login` route to create a session.
 
 We will create a session by creating a cookie using the `set` method of the `cookieAuth` object which (by default) the plugin adds to the request object.
 
@@ -89,8 +85,8 @@ const login = {
   handler (req, reply) {
     var username = req.payload.username;
     var password = req.payload.password;
-    // Check username and password details against database.
-    // If user exists, return an object with data uniquely identifying user.
+    // We would normally check username and password details against database.
+    // If user exists, return an object that uniquely identifies the user.
     // For this workshop skip this process and set the cookie right away...
     req.cookieAuth.set(username);
 
@@ -126,9 +122,11 @@ server.route({
 
 ## Stretch Goals
 
-### Access details of the logged in user
+### 1) Access details of the logged in user
 
-Easy: `request.auth.credentials`. We get back whatever we passed to `set`. Use this with handlebars to selectively render authenticated user information.
+Easy: `request.auth.credentials`. We get back whatever we passed to `set`.
+
+Use this with handlebars to selectively render authenticated user information.
 
 Your solution might look something like this...
 
@@ -151,12 +149,13 @@ handler: function (request, reply) {
 {{/if}}
 ```
 
-Alternatively... check out [hapi-context-credentials](https://github.com/mtharrison/hapi-context-credentials) for a neater way of doing this.
+Bonus points... check out [hapi-context-credentials](https://github.com/mtharrison/hapi-context-credentials) for a neater way of doing this.
 
-### Logout (end session)
+### 2) Logout (end session)
 
-Also easy: `request.cookieAuth.clear()`. No more cookie! Create a logout button and route which clears the cookie.
+Also easy: `request.cookieAuth.clear()`. No more cookie!
 
+Create a logout button and route which clears the cookie.
 
 ## Further information
 
