@@ -1,12 +1,12 @@
 # Hapi-auth-cookie workshop
 
-In this workshop you'll be adding session management (cookies) and authentication to the existing simple hapi server using [hapi-auth-cookie](https://github.com/hapijs/hapi-auth-cookie).
+In this workshop you'll be adding session management (cookies) and authentication to the existing simple hapi server using [hapi-auth-cookie](https://github.com/hapijs/hapi-auth-cookie). (These docs are a great resource)
 
-You'll see a hapi.js server in the src directory with a handlebars templating engine already configured.
+You'll see the hapi.js server in the src directory with a handlebars templating engine already configured.
 
 First clone the repo and run `npm install`.
 
-> Note: This workshop is designed to be a straight forward walk through. You may be tempted to simply copy and paste this code. Don't, you'll gain more by writing your code from scratch!
+> Note: This workshop is designed to be a straight forward walk through and a guide for later use during projects. You may be tempted to simply copy and paste this code. Don't, you'll gain more by writing your code from scratch!
 
 ## Step 1: Register hapi-auth-cookie
 
@@ -167,4 +167,4 @@ You have the option of passing a `mode` argument to `strategy` in this position:
 server.auth.strategy(name, scheme, [mode], [options])
 ```
 
-If you pass `true` or `'required'`, all routes will automatically be protected by the strategy. If you pass `'try'`, all routes will be protected, but with their `config.auth.mode` property set to try (see *Add auth to your routes* above).
+If you pass `true` or `'required'`, all routes will automatically be protected by the strategy. If you pass `'try'`, all routes will be protected, but with their `config.auth.mode` property set to try (see *Add auth to your routes* above). This is a good exercise to play around with if you have some time left.
