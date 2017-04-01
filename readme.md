@@ -2,7 +2,7 @@
 
 In this workshop you'll be adding session management (cookies) and authentication to the existing simple hapi server using [hapi-auth-cookie](https://github.com/hapijs/hapi-auth-cookie).
 
-You'll see a Hapi.js server in the src directory with a handlebars templating engine already configured.
+You'll see a hapi.js server in the src directory with a handlebars templating engine already configured.
 
 First clone the repo and run `npm install`.
 
@@ -16,7 +16,7 @@ First clone the repo and run `npm install`.
 npm install -S hapi-auth-cookie
 ```
 
-- Require CookieAuth in server.js:
+- Require hapi-auth-cookie in server.js:
 
 ```javascript
 var CookieAuth = require('hapi-auth-cookie');
@@ -94,33 +94,7 @@ const login = {
   }
 }
 ```
-
-## Step 4: Add auth to your routes
-
-Add authentication to your `/auth-only` route.
-
-We can check whether a cookie has been set by configuring the `auth` object of a route. We can allow access to the route and handle the 'session checking' in the handler:
-
-
-```javascript
-server.route({  
-  method: 'GET',
-  path: '/auth-only',
-  config: {
-    auth: {
-      mode: 'try',
-      strategy: 'base'
-    },
-    handler (request, reply) {
-      reply(request.auth.isAuthenticated
-      ? 'You\'re authenticated :)'
-      : 'You\'re not authenticated :(');
-    }
-  }
-})
-```
-
-## Stretch Goals
+## Step 4: Accessing the cookie
 
 ### 1) Access details of the logged in user
 
@@ -156,6 +130,32 @@ Bonus points... check out [hapi-context-credentials](https://github.com/mtharris
 Also easy: `request.cookieAuth.clear()`. No more cookie!
 
 Create a logout button and route which clears the cookie.
+
+
+## Stretch Goals - Add auth to your routes
+
+Add authentication to your `/auth-only` route.
+
+We can check whether a cookie has been set by configuring the `auth` object of a route. We can allow access to the route and handle the 'session checking' in the handler:
+
+
+```javascript
+server.route({  
+  method: 'GET',
+  path: '/auth-only',
+  config: {
+    auth: {
+      mode: 'try',
+      strategy: 'base'
+    },
+    handler (request, reply) {
+      reply(request.auth.isAuthenticated
+      ? 'You\'re authenticated :)'
+      : 'You\'re not authenticated :(');
+    }
+  }
+})
+```
 
 ## Further information
 
