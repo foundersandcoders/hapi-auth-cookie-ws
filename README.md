@@ -1,3 +1,7 @@
+**Author**: [@SavageWilliam](https://github.com/SavageWilliam)  
+
+**Maintainer**: TBC
+
 # Hapi-auth-cookie workshop
 
 In this workshop you'll be adding session management (cookies) and authentication to the existing simple hapi server using [hapi-auth-cookie](https://github.com/hapijs/hapi-auth-cookie). (These docs are a great resource)
